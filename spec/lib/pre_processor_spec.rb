@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 $:.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 require 'rspec'
-require 'smartgen_syntaxhighlighter/syntaxhighlighter_pre_processor'
+require 'smartgen_syntaxhighlighter/pre_processor'
 
 describe SyntaxhighlighterPreProcessor do
   ['ruby', 'plain', 'as3', 'shell', 'bash', 'xml'].each do |language|
