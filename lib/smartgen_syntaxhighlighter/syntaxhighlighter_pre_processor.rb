@@ -35,7 +35,11 @@ class SyntaxhighlighterPreProcessor
     end
   
     def to_class_attribute
-      options.sort.map { |key, value| "#{key}: #{value}" }.join('; ')
+      sorted_options.map { |key, value| "#{key}: #{value}" }.join('; ')
+    end
+    
+    def sorted_options
+      options.sort { |first_pair, second_pair| first_pair[0].to_s <=> second_pair[0].to_s }
     end
   
     def merge_with_defaults(opts)
