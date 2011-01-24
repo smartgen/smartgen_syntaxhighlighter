@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    smartgen_syntaxhighlighter (0.0.1)
+    smartgen_syntaxhighlighter (0.1.0)
       smartgen
 
 GEM
