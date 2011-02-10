@@ -1,12 +1,12 @@
 class SyntaxhighlighterPreProcessor
   attr_reader :options
-  
+
   def initialize(opts={})
     @enclose_with_tag = opts.delete(:enclose_with_tag)
     @options = merge_with_defaults(opts)
   end
-  
-  def process(body)
+
+  def process(body, metadata={})
     body.gsub(%r{<(ruby|js|javascript|shell|bash|html|xml|as3|plain)>(.*?)</\1>}m) do |match|
       escaped_code = ERB::Util.h($2)
 
@@ -24,24 +24,24 @@ class SyntaxhighlighterPreProcessor
       %{#{enclose_start_tag}<pre class="#{to_class_attribute}">#{escaped_code}</pre>#{enclose_end_tag}}
     end
   end
-    
+
   private
     def enclose_start_tag
       "<#{@enclose_with_tag}>" if @enclose_with_tag
     end
-    
+
     def enclose_end_tag
       "</#{@enclose_with_tag}>" if @enclose_with_tag
     end
-  
+
     def to_class_attribute
       sorted_options.map { |key, value| "#{key}: #{value}" }.join('; ')
     end
-    
+
     def sorted_options
       options.sort { |first_pair, second_pair| first_pair[0].to_s <=> second_pair[0].to_s }
     end
-  
+
     def merge_with_defaults(opts)
       { :gutter => false, :toolbar => false }.merge(opts)
     end
